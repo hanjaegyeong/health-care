@@ -7,15 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@CrossOrigin( //CORS해결위해
-        // localhost:5500 과 127.0.0.1 구분
-        origins = "http://127.0.0.1:5500", // allowCredentials = "true" 일 경우, orogins="*" 는 X
-        allowCredentials = "true",
-        allowedHeaders = "*",
-        methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.DELETE,RequestMethod.PUT,RequestMethod.HEAD,RequestMethod.OPTIONS}
-)
 public class HomeController {
-
     @GetMapping(value = "/")
     private String index() {
         return "/index.html";
@@ -38,8 +30,7 @@ public class HomeController {
 
     @GetMapping(value = "/logout")
     public String logout(HttpSession session) {
-
-        session.invalidate(); //세션 삭제
+        session.invalidate();
         return "/login.html";
     }
 }
