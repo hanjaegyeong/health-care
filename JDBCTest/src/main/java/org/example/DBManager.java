@@ -10,8 +10,8 @@ public class DBManager {
 
 	//jdbc_test테이블
 	private static String url = "jdbc:mysql://127.0.0.1:3306/jdbc_test?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8";
-	private static String user = "";
-	private static String pwd = "";
+	private static String user = "root";
+	private static String pwd = "0000";
 	
 	public static Connection getConnection() {
 		Connection con = null;

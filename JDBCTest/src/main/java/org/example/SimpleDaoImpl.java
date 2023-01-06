@@ -68,7 +68,7 @@ public class SimpleDaoImpl implements SimpleDao{
 	}
 	
 	@Override
-	public SimpleDto detail(int col_id) throws SQLException{
+	public SimpleDto detail(int col_id) throws SQLException{ //한 건만 가져오기
 		SimpleDto dto = null;
 		String sql = "select col_id, col_nm, col_not_null, col_default_val from jdbc_table " +
 					 " where col_id = ? ";

@@ -48,6 +48,4 @@ public class SimpleDto {
 		return "SimpleDto [colId=" + colId + ", colNm=" + colNm + ", colNotNull=" + colNotNull + ", colDefaultVal="
 				+ colDefaultVal + "]";
 	}
-	
-	
 }
