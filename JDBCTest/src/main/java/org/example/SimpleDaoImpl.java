@@ -19,17 +19,21 @@ import java.util.ArrayList;
 // detail()
 // list()
 // list(searchWord)
+
+//기본: 쿼리문에 ?로 원하는 변수 자리 비워두고 pstmt.setString(몇번째 물음표, 넣을 값) 이용
 public class SimpleDaoImpl implements SimpleDao{
 
+	// 특정 조건에 맞는 모든 데이터 리스트
 	@Override
 	public ArrayList<SimpleDto> list(String searchWord) throws SQLException{
 		ArrayList<SimpleDto> list = new ArrayList<>();
 		String sql = "select col_id, col_nm, col_not_null, col_default_val from jdbc_table " 
-				+ " where col_nm like ? ";
+				+ " where col_nm like ? ";   //like 이용(regex이용 가능)
 		Connection con = DBManager.getConnection();
 		
 		PreparedStatement pstmt = con.prepareStatement(sql);
-		pstmt.setString(1, "%" + searchWord + "%");
+		pstmt.setString(1, "%" + searchWord + "%"); // %는 아무 값이나 가능. 즉 searchWord포함한 모든 리스트 검색
+		//이때 쿼리식에 %쓰면 안되고 setString할때 정규식 이용. 쿼리문엔 ?만
 		
 		ResultSet rset = pstmt.executeQuery(); // select
 		while( rset.next() ) { // each row
@@ -45,6 +49,7 @@ public class SimpleDaoImpl implements SimpleDao{
 		return list;
 	}
 	
+	// 모든 데이터 리스트
 	@Override
 	public ArrayList<SimpleDto> list() throws SQLException{
 		ArrayList<SimpleDto> list = new ArrayList<>();
@@ -66,9 +71,10 @@ public class SimpleDaoImpl implements SimpleDao{
 		
 		return list;
 	}
-	
+
+	//DB에서 데이터 한 건만 가져오기
 	@Override
-	public SimpleDto detail(int col_id) throws SQLException{ //한 건만 가져오기
+	public SimpleDto detail(int col_id) throws SQLException{
 		SimpleDto dto = null;
 		String sql = "select col_id, col_nm, col_not_null, col_default_val from jdbc_table " +
 					 " where col_id = ? ";
@@ -90,7 +96,7 @@ public class SimpleDaoImpl implements SimpleDao{
 		return dto;
 	}
 
-	delete 로직 수정: dto객체->int값 바로 받기
+//	delete 로직 수정: dto객체->int값 바로 받기
 	@Override
 	public int delete(int colId) throws SQLException{
 		int ret = -1;
