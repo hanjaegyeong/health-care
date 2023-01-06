@@ -89,15 +89,16 @@ public class SimpleDaoImpl implements SimpleDao{
 		
 		return dto;
 	}
-	
+
+	delete 로직 수정: dto객체->int값 바로 받기
 	@Override
-	public int delete(SimpleDto dto) throws SQLException{
+	public int delete(int colId) throws SQLException{
 		int ret = -1;
 		String sql = "delete from jdbc_table where col_id = ? "; //얘도 where조건 잘 주기
 		Connection con = DBManager.getConnection();
 		
 		PreparedStatement pstmt = con.prepareStatement(sql);
-		pstmt.setInt(1, dto.getColId());
+		pstmt.setInt(1, colId);
 		
 		ret = pstmt.executeUpdate();
 		DBManager.releaseConnection(pstmt, con);

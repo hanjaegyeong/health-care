@@ -8,7 +8,7 @@ public interface SimpleDao {
 	public ArrayList<SimpleDto> list(String searchWord) throws SQLException;
 	public ArrayList<SimpleDto> list() throws SQLException;
 	public SimpleDto detail(int col_id) throws SQLException;
-	public int delete(SimpleDto dto) throws SQLException;
+	public int delete(int colId) throws SQLException;
 	public int update(SimpleDto dto) throws SQLException;
 	public int insert(SimpleDto dto) throws SQLException;
 	public int insertWithoutDefaultValue(SimpleDto dto) throws SQLException;
